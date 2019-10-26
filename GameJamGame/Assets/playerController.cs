@@ -9,7 +9,7 @@ public class playerController : MonoBehaviour
 	bool isGroundet = false;
 	Rigidbody2D rig;
 	Collider2D col;
-	Vector3 movement;
+	public Vector3 movement;
 
 	public float JumpPower = 5;
 
@@ -23,7 +23,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		movement = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+		movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
 
 		Jump();
 		Movement();
@@ -31,7 +31,7 @@ public class playerController : MonoBehaviour
 
 	private void Movement()
 	{
-		transform.position += movement * Time.deltaTime * moveSpeed;
+		transform.position += new Vector3(movement.x, 0, 0) * Time.deltaTime * moveSpeed;
 	}
 
 	void Jump()
