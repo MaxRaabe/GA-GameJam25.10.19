@@ -53,7 +53,7 @@ public class PlatformCreator : MonoBehaviour
 
 	void SpawnObject()
 	{
-
+		int index = 0;
 		for (int i = 0; i < PlattformCount; i++)
 		{
 			bool isCollide = true;
@@ -67,8 +67,12 @@ public class PlatformCreator : MonoBehaviour
 					Instantiate(SpawnObjects, pos, Quaternion.identity);
 					isCollide = false;
 				}
+				index++;
 
-				print("efefefe" + hitColliders);
+				if (index >= 100)
+				{
+					isCollide = false;
+				}
 			}
 		}
 	}

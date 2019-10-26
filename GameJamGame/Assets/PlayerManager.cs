@@ -12,7 +12,7 @@ namespace GameJam
         const int maxPlayers = 4;
 
         [SerializeField] List<Transform> playerSpawns = new List<Transform>(4);
-        List<playerController> players = new List<playerController>(maxPlayers);
+        public List<playerController> players = new List<playerController>(maxPlayers);
         // Start is called before the first frame update
         void Start()
         {
