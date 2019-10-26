@@ -57,13 +57,13 @@ namespace GameJam
                 if (Device.Action1.WasPressed)
                 {
                     Debug.Log("Dash towards :" + Device.LeftStick.X * dashForce);
-                    rig.AddForce(new Vector2(1, 1) * dashForce, ForceMode2D.Impulse);
+                    rig.AddForce(new Vector2(1,1) * dashForce, ForceMode2D.Impulse);
                 }
             }
 
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.collider.tag == "Ground")
             {
