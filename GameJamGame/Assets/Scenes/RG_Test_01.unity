@@ -204,7 +204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253743100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.42000008, y: -4.5, z: 0}
+  m_LocalPosition: {x: 0.42000008, y: -3.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -331,10 +331,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -0.29000008, y: 0, z: -10.74}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
+  m_FollowOffset: {x: -0.2, y: -0.3, z: -16.6}
+  m_XDamping: 0
+  m_YDamping: 0
+  m_ZDamping: 0
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -662,8 +662,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: -3.1862975e-21, y: 0.0134972455, z: -2.360487e-19, w: 0.9999089}
-  m_LocalPosition: {x: -0.29000008, y: 0, z: -10.74}
+  m_LocalRotation: {x: -0.009034208, y: 0.0060235052, z: 0.000054425283, w: 0.9999411}
+  m_LocalPosition: {x: -0.2, y: -0.3, z: -16.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 776065974}
@@ -727,7 +727,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -4.94}
+  m_Offset: {x: 0, y: -24.95}
   m_SpriteTilingProperty:
     border: {x: 0.22, y: 0.48, z: 0.14, w: 0.7}
     pivot: {x: 0.5, y: 0.5}
@@ -738,7 +738,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 37.56, y: 10.79}
+  m_Size: {x: 85.91, y: 50.3}
   m_EdgeRadius: 0
 --- !u!212 &776065976
 SpriteRenderer:
@@ -1606,14 +1606,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848453144}
-  m_LocalRotation: {x: -3.1862975e-21, y: 0.0134972455, z: -2.360487e-19, w: 0.9999089}
-  m_LocalPosition: {x: -0.29000008, y: 0, z: -10.74}
+  m_LocalRotation: {x: -0.009034208, y: 0.0060235052, z: 0.000054425283, w: 0.9999411}
+  m_LocalPosition: {x: -0.2, y: -0.3, z: -16.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 399610981}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -1.5450001, y: -14.495001, z: 0}
 --- !u!1001 &1863700196
 PrefabInstance:
   m_ObjectHideFlags: 0
