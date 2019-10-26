@@ -8,9 +8,11 @@ public class PlatformCreator : MonoBehaviour
 	public GameObject BottumPlane;
 	public GameObject SpawnObjects;
 
+	public int PlattformCount = 3;
+
 	private void Start()
 	{
-		//StartCoroutine(SpawnRoutine());
+		StartCoroutine(SpawnRoutine());
 	}
 
 	IEnumerator SpawnRoutine()
@@ -18,15 +20,15 @@ public class PlatformCreator : MonoBehaviour
 		yield return new WaitForSeconds(0.2f);
 
 		float dis;
-
+		
 		while (true)
 		{
 			dis = (transform.position - BottumPlane.transform.position).magnitude;
-
-			if (dis < 10)
+			
+			if (dis < 20)
 			{
 				SpawnObject();
-				transform.position += new Vector3(1,0,0);
+				transform.position += new Vector3(0,2,0);
 			}
 			yield return new WaitForSeconds(0.2f);
 		}
@@ -38,6 +40,7 @@ public class PlatformCreator : MonoBehaviour
 
 	protected Vector3 CalculatePossibleSpawnPoints()
 	{
+		//float ran = UnityEngine.Random.Range(5, 10);
 		Vector3 randomPoint = UnityEngine.Random.insideUnitSphere * _radius;
 		randomPoint.z = 0;
 		randomPoint.y = 0;
@@ -47,10 +50,26 @@ public class PlatformCreator : MonoBehaviour
 		return spawnPoints;
 	}
 
+
 	void SpawnObject()
 	{
-		Instantiate(SpawnObjects, CalculatePossibleSpawnPoints(), Quaternion.identity);
+
+		for (int i = 0; i < PlattformCount; i++)
+		{
+			bool isCollide = true;
+			while (isCollide)
+			{
+				Vector3 pos = CalculatePossibleSpawnPoints();
+				Collider2D hitColliders = Physics2D.OverlapCircle(new Vector2(pos.x, pos.y), 0.3f);
+
+				if (hitColliders == null)
+				{
+					Instantiate(SpawnObjects, pos, Quaternion.identity);
+					isCollide = false;
+				}
+
+				print("efefefe" + hitColliders);
+			}
+		}
 	}
-
-
 }
