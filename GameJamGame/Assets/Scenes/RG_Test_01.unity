@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 776065975}
   m_Layer: 0
   m_Name: ButtonLane
-  m_TagString: Untagged
+  m_TagString: Dead
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1538,6 +1538,7 @@ MonoBehaviour:
   group: {fileID: 0}
   CameraPoint: {fileID: 67274805}
   UnderBorder: {fileID: 776065974}
+  playersTransforms: []
 --- !u!4 &1758299888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7410011213650441601, guid: a916b1118f2fc0c4aa1a78cb16d8950e,

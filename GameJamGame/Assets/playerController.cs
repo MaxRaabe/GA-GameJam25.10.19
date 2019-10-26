@@ -76,7 +76,11 @@ namespace GameJam
                 DashInd = 0;
                 hasDashed = false;
                 isGroundet = true;
-            }
+			}
+			else if(collision.collider.tag == "Dead")
+			{
+				GetComponent<LivePoints>().RespawnPlayer();
+			}
         }
 
         private void OnCollisionExit2D(Collision2D collision)

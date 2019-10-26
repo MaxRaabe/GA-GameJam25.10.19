@@ -21,30 +21,30 @@ namespace GameJam
 			players = this.GetComponent<PlayerManager>();
 			playerTransforms.Clear();
 		}
-
 		float maxDis = 0;
+
 		// Update is called once per frame
 		void Update()
 		{
 			Vector2 erg = Vector2.zero;
 			for (int i = 0; i < players.players.Count; i++)
 			{
-				//float dis = (players.players[i].transform.position - UnderBorder.position).magnitude;
+				float dis = (players.players[i].transform.position - UnderBorder.position).magnitude;
 
-				//if (dis > maxDis)
-				//{
-				//	playerTransforms.Enqueue(players.players[i].transform);
+				if (dis > maxDis)
+				{
+					playerTransforms.Enqueue(players.players[i].transform);
 
-				//	maxDis = dis;
-				//	CameraPoint.position = (players.players[i].transform.position);
-				//}
+					maxDis = dis;
+				}
 
 				float _x = players.players[i].transform.position.x;
 				float _y = players.players[i].transform.position.y;
 
 				erg += new Vector2( _x, _y);
-				print("wdwdwd"+ erg);
 			}
+
+			maxDis = 0;
 
 			if (players.players.Count == 0)
 			{
@@ -55,7 +55,6 @@ namespace GameJam
 
 			CameraPoint.position = new Vector3(erg.x , erg.y, 0);
 
-			playerTransforms.Clear();
 
 			//	maxDis = 0;
 
