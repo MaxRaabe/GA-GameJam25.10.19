@@ -6,7 +6,7 @@ namespace GameJam
 {
 	public class LivePoints : MonoBehaviour
 	{
-		public int maxLivePoints = 100;
+		public int maxLivePoints = 3;
 		public int LivePointValue;
 
 		CameraController cam;
@@ -26,20 +26,21 @@ namespace GameJam
 		public void ReduceLivePoints(int damage)
 		{
 			LivePointValue -= damage;
-
-			if (LivePointValue <= 0)
-			{
-				RespawnPlayer();
-			}
 		}
 
 		public void RespawnPlayer()
 		{
-			LivePointValue = maxLivePoints;
+			ReduceLivePoints(1);
+			if (LivePointValue <= 0)
+			{
+				FindObjectOfType<PlayerManager>().DeletePLayer(GetComponent<playerController>());
+				Destroy(gameObject);
+				return;
+			}
 
 			PlatformCreator tr = FindObjectOfType<PlatformCreator>();
 
-			transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y - 1, tr.transform.position.z);
+			transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y - 5, tr.transform.position.z);
 		}
 
 	}

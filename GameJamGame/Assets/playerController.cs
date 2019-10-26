@@ -14,7 +14,8 @@ namespace GameJam
         Rigidbody2D rig;
         Collider2D col;
         public Vector3 movement;
-        bool hasJumped;
+		private bool isJumpimg = false;
+		bool hasJumped;
         bool hasDashed;
 
         public float JumpPower = 5;
@@ -38,7 +39,6 @@ namespace GameJam
             {
                 Dash();
             }
-
         }
 
         private void Movement()
@@ -48,13 +48,23 @@ namespace GameJam
 
         void Jump()
         {
-            if (Device.Action1.WasPressed && isGroundet == true)
+            if (Device.Action1.WasPressed && isGroundet == true && isJumpimg == false)
             {
+				StartCoroutine(deactivationJumpBool());
+				isJumpimg = true;
                 hasJumped = true;
                 rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
             }
 
         }
+
+		IEnumerator deactivationJumpBool()
+		{
+			yield return new WaitForSeconds(0.5f);
+			isJumpimg = false;
+			yield return null;
+		}
+
         int DashInd = 0;
         private int dashNumbers = 1;
         void Dash()
@@ -69,14 +79,16 @@ namespace GameJam
             DashInd++;
         }
 
-		private void OnTriggerEnter2D(Collider2D collision)
-		{
-			if (collision.tag == "Dead")
-			{
-				print("feerfererfefefefeferfere");
-				GetComponent<LivePoints>().RespawnPlayer();
-			}
-		}
+
+
+		//private void OnTriggerEnter2D(Collider2D collision)
+		//{
+		//	if (collision.tag == "Dead")
+		//	{
+		//		print("feerfererfefefefeferfere");
+		//		GetComponent<LivePoints>().RespawnPlayer();
+		//	}
+		//}
 
 		private void OnCollisionStay2D(Collision2D collision)
         {

@@ -17,7 +17,7 @@ public class PlatformCreator : MonoBehaviour
 
 	IEnumerator SpawnRoutine()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return new WaitForSeconds(0.01f);
 
 		float dis;
 		
@@ -25,12 +25,12 @@ public class PlatformCreator : MonoBehaviour
 		{
 			dis = (transform.position - BottumPlane.transform.position).magnitude;
 			
-			if (dis < 20)
+			if (dis < 30)
 			{
 				SpawnObject();
 				transform.position += new Vector3(0,2,0);
 			}
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(0.1f);
 		}
 
 	}

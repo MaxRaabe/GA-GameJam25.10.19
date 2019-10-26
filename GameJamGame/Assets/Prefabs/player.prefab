@@ -149,5 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b9e9c117755e5408ea7812a82e4a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLivePoints: 100
+  maxLivePoints: 3
   LivePointValue: 0

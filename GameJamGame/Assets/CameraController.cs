@@ -11,15 +11,12 @@ namespace GameJam
 		public Transform CameraPoint;
 		public Transform UnderBorder;
 		PlayerManager players;
-		public Transform[] playersTransforms;
 
-		public Queue<Transform> playerTransforms = new Queue<Transform>();
 
 		// Start is called before the first frame update
 		void Start()
 		{
 			players = this.GetComponent<PlayerManager>();
-			playerTransforms.Clear();
 		}
 		float maxDis = 0;
 
@@ -29,26 +26,23 @@ namespace GameJam
 			Vector2 erg = Vector2.zero;
 			for (int i = 0; i < players.players.Count; i++)
 			{
+				if (players.players[i].transform.position.y < UnderBorder.position.y)
+				{
+					players.players[i].GetComponent<LivePoints>().RespawnPlayer();
+				}
+
 				float dis = (players.players[i].transform.position - UnderBorder.position).magnitude;
 
 				if (dis > maxDis)
 				{
-					playerTransforms.Enqueue(players.players[i].transform);
-
 					maxDis = dis;
 				}
 
 				float _x = players.players[i].transform.position.x;
 				float _y = players.players[i].transform.position.y;
-
 				erg += new Vector2( _x, _y);
-				if (erg.y < CameraPoint.position.y)
-				{
-					erg.y = CameraPoint.position.y;
-				}
-			}
 
-			maxDis = 0;
+			}
 
 			if (players.players.Count == 0)
 			{
@@ -57,24 +51,17 @@ namespace GameJam
 
 			erg = erg / players.players.Count;
 
-			CameraPoint.position = new Vector3(erg.x , erg.y, 0);
+			if (erg.y < CameraPoint.position.y)
+			{
+				erg.y = CameraPoint.position.y;
+			}
 
+			maxDis = 0;
 
-			//	maxDis = 0;
+			//CameraPoint.position = new Vector3(erg.x , erg.y, 0);
 
-			//Vector3 screenPos = Camera.main.WorldToScreenPoint(player.transform.position);
-			//print("screenPos " + screenPos);
-			//group.m_Targets[1].weight = 2;
-
-			//var v1 = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 1));
-			//var v2 = Camera.main.ViewportToWorldPoint(player.transform.position);
-			//var v2 = Camera.main.WorldToScreenPoint(player.transform.position);
-
-			//var v2 = Camera.main.ViewportToWorldPoint(new Vector3(1, 0.5f, 1));
-			//var dist = Vector3.Distance(v1, v2);
-
-			//print("000   v1         " + v1);
-			//print("000    v2        " + v2);
+			CameraPoint.position = Vector3.Lerp(CameraPoint.position, new Vector3(erg.x, erg.y, 0), 3 * Time.deltaTime);
 		}
+
 	}
 }
