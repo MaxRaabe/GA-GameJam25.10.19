@@ -17,6 +17,7 @@ namespace GameJam
 		private bool isJumpimg = false;
 		bool hasJumped;
         bool hasDashed;
+        bool isDashing;
 
         public float JumpPower = 5;
         public float dashForce = 100;
@@ -69,17 +70,26 @@ namespace GameJam
         private int dashNumbers = 1;
         void Dash()
         {
-            if (DashInd >= dashNumbers)
+            if (!isDashing)
             {
-                return;
+                if (DashInd >= dashNumbers)
+                {
+                    return;
 
+                }
+                isDashing = true;
+                Debug.Log("Dash");
+                rig.AddForce(new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y) * dashForce, ForceMode2D.Impulse);
+                DashInd++;
+                StartCoroutine(deactivateDash());
             }
-            Debug.Log("Dash");
-            rig.AddForce(new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y)*dashForce, ForceMode2D.Impulse);
-            DashInd++;
         }
-
-
+        IEnumerator deactivateDash()
+        {
+            yield return new WaitForSeconds(1.0f);
+            isDashing = false;
+            yield return null;
+        }
 
 		//private void OnTriggerEnter2D(Collider2D collision)
 		//{
@@ -113,8 +123,9 @@ namespace GameJam
                     heG.transform.position = transform.position;
                     transform.position = heG.transform.position;
 
-                    heR.AddForce(new Vector2(0,-1));
-                    rig.AddForce(new Vector2(0,1));
+                    heR.velocity = new Vector2(0,0);
+                    heR.AddForce(new Vector2(0,-10));
+                    rig.AddForce(new Vector2(0,10));
                     
                 }
                 else
