@@ -6,8 +6,14 @@ namespace GameJam
 {
 	public class LivePoints : MonoBehaviour
 	{
+		public GameObject Panel;
+		List<GameObject> herzen = new List<GameObject>();
+
 		public int maxLivePoints = 3;
 		public int LivePointValue;
+
+		public GameObject Herz;
+
 
 		CameraController cam;
 		// Start is called before the first frame update
@@ -42,6 +48,13 @@ namespace GameJam
 
 			transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y - 5, tr.transform.position.z);
 		}
+
+		public void UpdateLiveImage()
+		{
+
+		}
+
+
 
 	}
 

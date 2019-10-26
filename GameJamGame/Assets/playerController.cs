@@ -8,6 +8,8 @@ namespace GameJam
 {
     public class playerController : MonoBehaviour
     {
+
+		public GameObject PressStartObj;
         public InputDevice Device { get; set; }
         public float moveSpeed = 5;
         bool isGroundet = false;
@@ -38,6 +40,7 @@ namespace GameJam
 			if (Device.CommandWasPressed)
 			{
 				playerReady = true;
+				PressStartObj.SetActive(false);
 			}
 
 			if (GameisStarted)
