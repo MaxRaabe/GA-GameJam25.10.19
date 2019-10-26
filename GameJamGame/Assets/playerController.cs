@@ -82,6 +82,25 @@ namespace GameJam
 				GetComponent<LivePoints>().RespawnPlayer();
 			}
         }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Player")
+            {
+                Rigidbody2D heR = collision.transform.GetComponent<Rigidbody2D>();
+                GameObject heG = collision.gameObject ;
+
+                if(transform.position.y < heG.transform.position.y)
+                {
+                    heG.transform.position = transform.position;
+                    transform.position = heG.transform.position;
+
+                    heR.AddForce(new Vector2(0,-1));
+                    rig.AddForce(new Vector2(0,1));
+                    
+                }
+                    
+            }
+        }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
