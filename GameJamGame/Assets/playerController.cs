@@ -69,7 +69,16 @@ namespace GameJam
             DashInd++;
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+		private void OnTriggerEnter2D(Collider2D collision)
+		{
+			if (collision.tag == "Dead")
+			{
+				print("feerfererfefefefeferfere");
+				GetComponent<LivePoints>().RespawnPlayer();
+			}
+		}
+
+		private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.collider.tag == "Ground")
             {
@@ -77,10 +86,8 @@ namespace GameJam
                 hasDashed = false;
                 isGroundet = true;
 			}
-			else if(collision.collider.tag == "Dead")
-			{
-				GetComponent<LivePoints>().RespawnPlayer();
-			}
+
+
         }
         private void OnCollisionEnter2D(Collision2D collision)
         {

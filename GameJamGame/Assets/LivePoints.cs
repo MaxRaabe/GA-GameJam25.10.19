@@ -20,11 +20,7 @@ namespace GameJam
 		// Update is called once per frame
 		void Update()
 		{
-			if (Input.GetKeyDown(KeyCode.Q))
-			{
-				RespawnPlayer();
-			}
-			
+
 		}
 
 		public void ReduceLivePoints(int damage)
@@ -40,7 +36,10 @@ namespace GameJam
 		public void RespawnPlayer()
 		{
 			LivePointValue = maxLivePoints;
-			transform.position = cam.playerTransforms.Peek().position;
+
+			PlatformCreator tr = FindObjectOfType<PlatformCreator>();
+
+			transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y - 1, tr.transform.position.z);
 		}
 
 	}

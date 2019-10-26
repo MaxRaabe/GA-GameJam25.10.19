@@ -42,6 +42,10 @@ namespace GameJam
 				float _y = players.players[i].transform.position.y;
 
 				erg += new Vector2( _x, _y);
+				if (erg.y < CameraPoint.position.y)
+				{
+					erg.y = CameraPoint.position.y;
+				}
 			}
 
 			maxDis = 0;
