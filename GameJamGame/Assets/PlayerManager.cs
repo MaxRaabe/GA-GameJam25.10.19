@@ -7,8 +7,8 @@ namespace GameJam
 {
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField]public GameObject playerPrefab;
-
+        [SerializeField]public GameObject[] playerPrefab;
+        int playerind;
         const int maxPlayers = 4;
 
         [SerializeField] List<Transform> playerSpawns = new List<Transform>(4);
@@ -29,6 +29,7 @@ namespace GameJam
                 if (ThereIsNoPlayerUsingDevice(inputDevice))
                 {
                     CreatePlayer(inputDevice);
+                    playerind++;
                 }
             }
         }
@@ -69,8 +70,7 @@ namespace GameJam
             {
                 var playerPosition = playerSpawns[0];
                 playerSpawns.RemoveAt(0);
-
-                var gameObject = (GameObject)Instantiate(playerPrefab, playerPosition.position, Quaternion.identity);
+                var gameObject = (GameObject)Instantiate(playerPrefab[playerind], playerPosition.position, Quaternion.identity);
                 var player = gameObject.GetComponent<playerController>();
                 player.Device = inputDevice;
                 players.Add(player);

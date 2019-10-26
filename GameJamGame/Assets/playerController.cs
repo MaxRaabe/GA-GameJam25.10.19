@@ -105,6 +105,10 @@ namespace GameJam
                     rig.AddForce(new Vector2(0,1));
                     
                 }
+                else
+                {
+                    return;
+                }
                     
             }
         }
