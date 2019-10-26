@@ -21,8 +21,11 @@ namespace GameJam
         public float JumpPower = 5;
         public float dashForce = 100;
 
-        // Start is called before the first frame update
-        void Start()
+		public bool GameisStarted = false;
+		public bool playerReady = false;
+
+		// Start is called before the first frame update
+		void Start()
         {
             rig = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
@@ -31,14 +34,23 @@ namespace GameJam
         // Update is called once per frame
         void Update()
         {
-            movement = new Vector3(Device.LeftStick.X, Device.LeftStick.Y, 0);
+			if (Device.CommandWasPressed)
+			{
+				playerReady = true;
+			}
 
-            Jump();
-            Movement();
-            if (Device.RightTrigger.WasPressed)
-            {
-                Dash();
-            }
+			if (GameisStarted)
+			{
+				movement = new Vector3(Device.LeftStick.X, Device.LeftStick.Y, 0);
+
+				Jump();
+				Movement();
+				if (Device.RightTrigger.WasPressed)
+				{
+					Dash();
+				}
+			}
+
         }
 
         private void Movement()

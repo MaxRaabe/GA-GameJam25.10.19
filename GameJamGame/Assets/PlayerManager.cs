@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InControl;
+using System;
+using UnityEngine.SceneManagement;
+
 
 namespace GameJam
 {
@@ -13,6 +16,10 @@ namespace GameJam
 
 		[SerializeField] List<Transform> playerSpawns = new List<Transform>(4);
 		public List<playerController> players = new List<playerController>(maxPlayers);
+
+		public bool GameisStarted = false;
+
+
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -22,7 +29,14 @@ namespace GameJam
 		// Update is called once per frame
 		void Update()
 		{
+			if (players.Count <= 1 && GameisStarted)
+			{
+				StartCoroutine(PlayerWin());
+			}
+
 			var inputDevice = InputManager.ActiveDevice;
+
+
 
 			if (Joined(inputDevice))
 			{
@@ -32,13 +46,54 @@ namespace GameJam
 					playerind++;
 				}
 			}
+
+			if (!GameisStarted)
+			{
+				int rdyCounter = 0;
+
+				for (int i = 0; i < players.Count; i++)
+				{
+
+					if (players[i].playerReady)
+					{
+						print("ewfe11212121212ferfe");
+						rdyCounter++;
+					}
+				}
+
+				if (rdyCounter == players.Count && players.Count != 0)
+				{
+					StartGame();
+				}
+			}
+
 		}
+
+		 IEnumerator PlayerWin()
+		{
+					   			 
+			yield return new WaitForSeconds(1);
+
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+		}
+
+		private void StartGame()
+		{
+			GameisStarted = true;
+
+			for (int i = 0; i < players.Count; i++)
+			{
+				players[i].GameisStarted = true;
+			}
+		}
+
 		bool Joined(InputDevice inputDevice)
 		{
-			return inputDevice.AnyButton.WasPressed;
-
-
+			return inputDevice.Action1.WasPressed;
 		}
+
+
 		bool ThereIsNoPlayerUsingDevice(InputDevice inputDevice)
 		{
 			return FindPlayerUsingDevice(inputDevice) == null;
