@@ -15,9 +15,10 @@ namespace GameJam
         Collider2D col;
         public Vector3 movement;
         bool hasJumped;
+        bool hasDashed;
 
         public float JumpPower = 5;
-        public float dashForce;
+        public float dashForce = 100;
 
         // Start is called before the first frame update
         void Start()
@@ -33,7 +34,11 @@ namespace GameJam
 
             Jump();
             Movement();
-            Dash();
+            if (Device.RightTrigger.WasPressed)
+            {
+                Dash();
+            }
+
         }
 
         private void Movement()
@@ -45,28 +50,31 @@ namespace GameJam
         {
             if (Device.Action1.WasPressed && isGroundet == true)
             {
-                rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
                 hasJumped = true;
+                rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
             }
 
         }
+        int DashInd = 0;
+        private int dashNumbers = 1;
         void Dash()
         {
-            if (hasJumped)
+            if (DashInd >= dashNumbers)
             {
-                if (Device.Action1.WasPressed)
-                {
-                    Debug.Log("Dash towards :" + Device.LeftStick.X * dashForce);
-                    rig.AddForce(new Vector2(1,1) * dashForce, ForceMode2D.Impulse);
-                }
-            }
+                return;
 
+            }
+            Debug.Log("Dash");
+            rig.AddForce(new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y)*dashForce, ForceMode2D.Impulse);
+            DashInd++;
         }
 
         private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.collider.tag == "Ground")
             {
+                DashInd = 0;
+                hasDashed = false;
                 isGroundet = true;
             }
         }

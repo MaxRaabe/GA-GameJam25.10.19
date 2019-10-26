@@ -135,3 +135,4 @@ MonoBehaviour:
   moveSpeed: 5
   movement: {x: 0, y: 0, z: 0}
   JumpPower: 20
+  dashForce: 20
