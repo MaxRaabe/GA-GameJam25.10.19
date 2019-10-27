@@ -8,6 +8,11 @@ namespace GameJam
 {
     public class playerController : MonoBehaviour
     {
+
+		public AudioClip jump;
+		public AudioClip dash;
+
+
 		public Animator ani;
 		public GameObject PressStartObj;
         public InputDevice Device { get; set; }
@@ -75,7 +80,9 @@ namespace GameJam
 				StartCoroutine(deactivationJumpBool());
 				isJumpimg = true;
                 hasJumped = true;
-				ani.SetTrigger("Jump");
+				AudioSource.PlayClipAtPoint(jump, transform.position);
+
+			//	ani.SetTrigger("Jump");
 
                 rig.velocity = new Vector2(0, JumpPower);
             }
@@ -104,7 +111,9 @@ namespace GameJam
                 isDashing = true;
                /// Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
-				ani.SetTrigger("Dash");
+			//	ani.SetTrigger("Dash");
+				AudioSource.PlayClipAtPoint(dash, transform.position);
+
 				rig.velocity= new Vector2(dir.x,dir.y)*dashForce;
                 DashInd++;
                 StartCoroutine(deactivateDash());
@@ -146,13 +155,14 @@ namespace GameJam
 
                 if(transform.position.y < heG.transform.position.y)
                 {
-                    heG.transform.position = transform.position;
-                    transform.position = heG.transform.position;
+					rig.velocity = Vector2.zero;
+					heR.velocity = Vector2.zero;
 
-                    heR.velocity = new Vector2(0,-4);
-                   // heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
-                    rig.AddForce(new Vector2(0,20),ForceMode2D.Impulse);
-                    
+					rig.gravityScale = 0;
+					heR.gravityScale = 0;
+					ani.SetTrigger("Grab");
+
+					StartCoroutine(Slowy(heG, heR));
                 }
                 else
                 {
@@ -168,6 +178,23 @@ namespace GameJam
                 rig.AddForce(new Vector2(5,0));
             }
         }
+
+		IEnumerator Slowy(GameObject _heG , Rigidbody2D _heR)
+		{
+			yield return new WaitForSeconds(0.1f);
+			_heG.transform.position = transform.position;
+			transform.position = _heG.transform.position;
+			_heR.velocity = new Vector2(0, -4);
+			// heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
+			rig.AddForce(new Vector2(0, 20), ForceMode2D.Impulse);
+
+			rig.gravityScale = 5;
+			_heR.gravityScale = 5;
+
+
+			yield return null;
+		}
+
 
         private void OnCollisionExit2D(Collision2D collision)
         {
