@@ -590,6 +590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10fb1b1fafa26514bbf6a5665584d4b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jump: {fileID: 8300000, guid: dcbb2656d8ce27c4f80e85fb02bd4b52, type: 3}
+  dash: {fileID: 8300000, guid: 857af78fc75da324b9ee1ecbd4afa418, type: 3}
   ani: {fileID: 0}
   PressStartObj: {fileID: 4041395523632700549}
   moveSpeed: 5
@@ -617,7 +619,7 @@ MonoBehaviour:
   - {fileID: 101025036300883291}
   - {fileID: 4616041649429055579}
   maxLivePoints: 4
-  LivePointValue: 0
+  LivePointValue: 4
   Herz: {fileID: 4737866091200755368, guid: f3117863a52503b45bf174becaa1dd62, type: 3}
 --- !u!95 &4573531607418565266
 Animator:

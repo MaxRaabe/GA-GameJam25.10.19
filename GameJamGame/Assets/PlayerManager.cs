@@ -75,7 +75,7 @@ namespace GameJam
 		{
 			winText.gameObject.SetActive(true);
 			winImage.sprite = players[0].gameObject.GetComponent<SpriteRenderer>().sprite;
-			AudioSource.PlayClipAtPoint(win, transform.position);
+		//	AudioSource.PlayClipAtPoint(win, transform.position);
 
 			winImage.gameObject.SetActive(true);
 
@@ -147,6 +147,7 @@ namespace GameJam
 		}
 		void RemovePlayer(playerController player)
 		{
+			print("remove!!!!!!!");
 			playerSpawns.Insert(0, player.transform);
 			players.Remove(player);
 			player.Device = null;
@@ -156,7 +157,7 @@ namespace GameJam
 
 		public void DeletePLayer(playerController player)
 		{
-
+			print("delete!!!!!!!!!!");
 			players.Remove(player);
 
 		}

@@ -28,7 +28,7 @@ public class PlatformCreator : MonoBehaviour
 			if (dis < 30)
 			{
 				SpawnObject();
-				transform.position += new Vector3(0,5,0);
+				transform.position += new Vector3(0,4,0);
 			}
 			yield return new WaitForSeconds(0.1f);
 		}

@@ -29,6 +29,7 @@ namespace GameJam
         public float JumpPower = 5;
         public float dashForce = 100;
 
+		public bool cantChange = false;
 		public bool GameisStarted = false;
 		public bool playerReady = false;
 
@@ -82,7 +83,7 @@ namespace GameJam
                 hasJumped = true;
 				AudioSource.PlayClipAtPoint(jump, transform.position);
 
-			//	ani.SetTrigger("Jump");
+				ani.SetTrigger("Jump");
 
                 rig.velocity = new Vector2(0, JumpPower);
             }
@@ -111,7 +112,7 @@ namespace GameJam
                 isDashing = true;
                /// Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
-			//	ani.SetTrigger("Dash");
+				ani.SetTrigger("Dash");
 				AudioSource.PlayClipAtPoint(dash, transform.position);
 
 				rig.velocity= new Vector2(dir.x,dir.y)*dashForce;
@@ -170,13 +171,7 @@ namespace GameJam
                 }
                     
             }
-            if(collision.collider.tag == "Wall")
-            {
-                /*Vector2 rein = rig.velocity;
-                Vector2 normal = collision.contacts[0].normal;
-                rig.velocity = Vector2.Reflect(rein,normal);*/
-                rig.AddForce(new Vector2(5,0));
-            }
+
         }
 
 		IEnumerator Slowy(GameObject _heG , Rigidbody2D _heR)
@@ -184,9 +179,9 @@ namespace GameJam
 			yield return new WaitForSeconds(0.1f);
 			_heG.transform.position = transform.position;
 			transform.position = _heG.transform.position;
-			_heR.velocity = new Vector2(0, -4);
+			_heR.velocity = new Vector2(0, -10);
 			// heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
-			rig.AddForce(new Vector2(0, 20), ForceMode2D.Impulse);
+			rig.AddForce(new Vector2(0, 30), ForceMode2D.Impulse);
 
 			rig.gravityScale = 5;
 			_heR.gravityScale = 5;
