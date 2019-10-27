@@ -11,7 +11,7 @@ namespace GameJam
 {
 	public class PlayerManager : MonoBehaviour
 	{
-
+		public AudioClip win;
 		public TextMeshProUGUI winText;
 		public Image winImage;
 
@@ -40,8 +40,6 @@ namespace GameJam
 			}
 
 			var inputDevice = InputManager.ActiveDevice;
-
-
 
 			if (Joined(inputDevice))
 			{
@@ -73,10 +71,11 @@ namespace GameJam
 
 		}
 
-		 IEnumerator PlayerWin()
+		IEnumerator PlayerWin()
 		{
 			winText.gameObject.SetActive(true);
-			winImage.sprite = players[0].gameObject.GetComponent<SpriteRenderer>().sprite; 
+			winImage.sprite = players[0].gameObject.GetComponent<SpriteRenderer>().sprite;
+			AudioSource.PlayClipAtPoint(win, transform.position);
 
 			winImage.gameObject.SetActive(true);
 
@@ -128,6 +127,7 @@ namespace GameJam
 				RemovePlayer(player);
 			}
 		}
+
 		playerController CreatePlayer(InputDevice inputDevice)
 		{
 			if (players.Count < maxPlayers)
@@ -137,6 +137,7 @@ namespace GameJam
 				var gameObject = (GameObject)Instantiate(playerPrefab[playerind], playerPosition.position, Quaternion.identity);
 				var player = gameObject.GetComponent<playerController>();
 				player.Device = inputDevice;
+				print("fewfewewffwf " + player);
 				players.Add(player);
 
 				return player;

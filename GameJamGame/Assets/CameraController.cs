@@ -60,10 +60,10 @@ namespace GameJam
 
 			maxDis = 0;
 
-			//if (players.GameisStarted)
-			//{
-			//	erg.y = erg.y + Time.deltaTime*100;
-			//}
+			if (players.GameisStarted)
+			{
+				erg.y = erg.y + Time.deltaTime * 100;
+			}
 
 			CameraPoint.position = Vector3.Lerp(CameraPoint.position, new Vector3(0, erg.y, 0), 3 * Time.deltaTime);
 		}
