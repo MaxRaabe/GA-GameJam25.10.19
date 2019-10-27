@@ -94,7 +94,9 @@ namespace GameJam
                 }
                 isDashing = true;
                 Debug.Log("Dash");
-                rig.AddForce(new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y) * dashForce, ForceMode2D.Impulse);
+				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
+
+				rig.AddForce(dir * dashForce, ForceMode2D.Impulse);
                 DashInd++;
                 StartCoroutine(deactivateDash());
             }
@@ -139,8 +141,8 @@ namespace GameJam
                     transform.position = heG.transform.position;
 
                     heR.velocity = new Vector2(0,0);
-                    heR.AddForce(new Vector2(0,-10));
-                    rig.AddForce(new Vector2(0,10));
+                    heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
+                    rig.AddForce(new Vector2(0,20),ForceMode2D.Impulse);
                     
                 }
                 else

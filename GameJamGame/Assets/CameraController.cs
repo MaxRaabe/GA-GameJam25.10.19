@@ -10,6 +10,7 @@ namespace GameJam
 		public CinemachineTargetGroup group;
 		public Transform CameraPoint;
 		public Transform UnderBorder;
+		public Transform TopBorder;
 		PlayerManager players;
 
 
@@ -28,7 +29,8 @@ namespace GameJam
 			{
 				if (players.players[i].transform.position.y < UnderBorder.position.y)
 				{
-					players.players[i].GetComponent<LivePoints>().RespawnPlayer();
+					players.players[i].GetComponent<LivePoints>().RespawnPlayer(TopBorder);
+					continue;
 				}
 
 				float dis = (players.players[i].transform.position - UnderBorder.position).magnitude;
@@ -58,13 +60,12 @@ namespace GameJam
 
 			maxDis = 0;
 
-			if (players.GameisStarted)
-			{
-				erg.y = erg.y + Time.deltaTime*100;
-			}
-			//CameraPoint.position = new Vector3(erg.x , erg.y, 0);
+			//if (players.GameisStarted)
+			//{
+			//	erg.y = erg.y + Time.deltaTime*100;
+			//}
 
-			CameraPoint.position = Vector3.Lerp(CameraPoint.position, new Vector3(erg.x, erg.y, 0), 3 * Time.deltaTime);
+			CameraPoint.position = Vector3.Lerp(CameraPoint.position, new Vector3(0, erg.y, 0), 3 * Time.deltaTime);
 		}
 
 	}

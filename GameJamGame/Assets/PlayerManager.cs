@@ -4,12 +4,17 @@ using UnityEngine;
 using InControl;
 using System;
 using UnityEngine.SceneManagement;
-
+using TMPro;
+using UnityEngine.UI;
 
 namespace GameJam
 {
 	public class PlayerManager : MonoBehaviour
 	{
+
+		public TextMeshProUGUI winText;
+		public Image winImage;
+
 		[SerializeField] public GameObject[] playerPrefab;
 		int playerind;
 		const int maxPlayers = 4;
@@ -56,7 +61,6 @@ namespace GameJam
 
 					if (players[i].playerReady)
 					{
-						print("ewfe11212121212ferfe");
 						rdyCounter++;
 					}
 				}
@@ -71,8 +75,13 @@ namespace GameJam
 
 		 IEnumerator PlayerWin()
 		{
-					   			 
-			yield return new WaitForSeconds(1);
+			winText.gameObject.SetActive(true);
+			winImage.sprite = players[0].gameObject.GetComponent<SpriteRenderer>().sprite; 
+
+			winImage.gameObject.SetActive(true);
+
+
+			yield return new WaitForSeconds(2);
 
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
