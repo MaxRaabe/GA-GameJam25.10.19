@@ -101,7 +101,7 @@ namespace GameJam
 
                 }
                 isDashing = true;
-                Debug.Log("Dash");
+               /// Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
 				ani.SetTrigger("Dash");
 				rig.AddForce(dir * dashForce, ForceMode2D.Impulse);
