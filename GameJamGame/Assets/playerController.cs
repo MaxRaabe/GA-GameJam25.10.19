@@ -102,7 +102,7 @@ namespace GameJam
                 }
                 rig.velocity = Vector2.zero;
                 isDashing = true;
-                Debug.Log("Dash");
+               /// Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
 				ani.SetTrigger("Dash");
 				rig.velocity= new Vector2(dir.x,dir.y)*dashForce;
