@@ -594,8 +594,8 @@ MonoBehaviour:
   PressStartObj: {fileID: 4041395523632700549}
   moveSpeed: 5
   movement: {x: 0, y: 0, z: 0}
-  JumpPower: 20
-  dashForce: 20
+  JumpPower: 30
+  dashForce: 30
   GameisStarted: 0
   playerReady: 0
 --- !u!114 &3188812294418808251

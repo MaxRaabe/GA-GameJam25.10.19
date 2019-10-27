@@ -77,7 +77,7 @@ namespace GameJam
                 hasJumped = true;
 				ani.SetTrigger("Jump");
 
-				rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
+                rig.velocity = new Vector2(0, JumpPower);
             }
 
         }
@@ -100,11 +100,12 @@ namespace GameJam
                     return;
 
                 }
+                rig.velocity = Vector2.zero;
                 isDashing = true;
                 Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
 				ani.SetTrigger("Dash");
-				rig.AddForce(dir * dashForce, ForceMode2D.Impulse);
+				rig.velocity= new Vector2(dir.x,dir.y)*dashForce;
                 DashInd++;
                 StartCoroutine(deactivateDash());
             }
@@ -148,8 +149,8 @@ namespace GameJam
                     heG.transform.position = transform.position;
                     transform.position = heG.transform.position;
 
-                    heR.velocity = new Vector2(0,0);
-                    heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
+                    heR.velocity = new Vector2(0,-4);
+                   // heR.AddForce(new Vector2(0,-10), ForceMode2D.Impulse);
                     rig.AddForce(new Vector2(0,20),ForceMode2D.Impulse);
                     
                 }
@@ -158,6 +159,13 @@ namespace GameJam
                     return;
                 }
                     
+            }
+            if(collision.collider.tag == "Wall")
+            {
+                /*Vector2 rein = rig.velocity;
+                Vector2 normal = collision.contacts[0].normal;
+                rig.velocity = Vector2.Reflect(rein,normal);*/
+                rig.AddForce(new Vector2(5,0));
             }
         }
 
