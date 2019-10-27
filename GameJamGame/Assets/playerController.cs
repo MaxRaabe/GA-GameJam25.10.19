@@ -8,7 +8,7 @@ namespace GameJam
 {
     public class playerController : MonoBehaviour
     {
-
+		public Animator ani;
 		public GameObject PressStartObj;
         public InputDevice Device { get; set; }
         public float moveSpeed = 5;
@@ -30,7 +30,8 @@ namespace GameJam
 		// Start is called before the first frame update
 		void Start()
         {
-            rig = GetComponent<Rigidbody2D>();
+			ani = GetComponent<Animator>();
+			rig = GetComponent<Rigidbody2D>();
             col = GetComponent<Collider2D>();
         }
 
@@ -46,6 +47,11 @@ namespace GameJam
 			if (GameisStarted)
 			{
 				movement = new Vector3(Device.LeftStick.X, Device.LeftStick.Y, 0);
+
+				Vector2 vec = new Vector2(Device.LeftStick.X, Device.LeftStick.Y).normalized;
+				float heading = Mathf.Atan2(vec.x ,vec.y);
+				heading = Mathf.Abs(heading);
+				ani.SetFloat("Move", heading);
 
 				Jump();
 				Movement();
@@ -69,7 +75,9 @@ namespace GameJam
 				StartCoroutine(deactivationJumpBool());
 				isJumpimg = true;
                 hasJumped = true;
-                rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
+				ani.SetTrigger("Jump");
+
+				rig.AddForce(new Vector2(0, JumpPower), ForceMode2D.Impulse);
             }
 
         }
@@ -95,7 +103,7 @@ namespace GameJam
                 isDashing = true;
                 Debug.Log("Dash");
 				Vector2 dir = new Vector2(Device.LeftStick.Value.x, Device.LeftStick.Value.y).normalized;
-
+				ani.SetTrigger("Dash");
 				rig.AddForce(dir * dashForce, ForceMode2D.Impulse);
                 DashInd++;
                 StartCoroutine(deactivateDash());
